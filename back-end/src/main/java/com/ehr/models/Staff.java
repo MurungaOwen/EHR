@@ -1,23 +1,44 @@
 package com.ehr.models;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
+import java.time.LocalDateTime;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
+@Entity
 public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String work_id;
-    private String created_at;
-    private String updated_at;
-    private String first_name;
-    private String last_name;
+    @Column(unique = true, nullable = false)
+    private String workId;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    private String firstName;
+    private String lastName;
+
+    @Column(nullable = false)
     private String password;
-    private  enum role{doctor, receiptionist, pharmacist, labtech};
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public enum Role {
+        DOCTOR, RECEPTIONIST, PHARMACIST, LABTECH, ADMIN
+    }
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+        updatedAt = createdAt;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }
