@@ -1,4 +1,4 @@
-package main.java.com.ehr.models;
+package com.ehr.models;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;

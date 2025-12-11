@@ -1,4 +1,4 @@
-package main.java.com.ehr.models;
+package com.ehr.models;
 
 import lombok.Data;
 
