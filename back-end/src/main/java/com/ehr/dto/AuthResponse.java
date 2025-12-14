@@ -1,21 +1,25 @@
 package com.ehr.dto;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {
     private String message;
-    private String sessionId;
-    private String userType;  // "PATIENT" or "STAFF"
+    private String userType;  // "USER" or "STAFF"
     private String userId;
     private String fullName;
     private String role;
 
-    public AuthResponse(String message, String sessionId, String userType) {
+    // Constructor with just message and userType (for register, error, logout)
+    public AuthResponse(String message, String userType) {
         this.message = message;
-        this.sessionId = sessionId;
         this.userType = userType;
+        this.userId = null;
+        this.fullName = null;
+        this.role = null;
     }
 }
